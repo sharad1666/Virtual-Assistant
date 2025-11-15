@@ -179,75 +179,75 @@ function Home() {
     //   }
     // };
 
-    recognition.onerror = (event) => {
-  console.warn("Recognition error:", event.error);
-  isRecognizingRef.current = false;
-  setListening(false);
+//     recognition.onerror = (event) => {
+//   console.warn("Recognition error:", event.error);
+//   isRecognizingRef.current = false;
+//   setListening(false);
 
-  // Do NOT restart immediately after "no-speech"
-  if (event.error === "no-speech") {
-    console.log("No speech detected. Waiting before restart...");
-    setTimeout(() => {
-      if (!isSpeakingRef.current && isMounted) {
-        try {
-          recognition.start();
-          console.log("Recognition restarted after no-speech");
-        } catch (e) {
-          if (e.name !== "InvalidStateError") console.error(e);
-        }
-      }
-    }, 2000); // Delay prevents the rapid error loop
-    return;
-  }
+//   // Do NOT restart immediately after "no-speech"
+//   if (event.error === "no-speech") {
+//     console.log("No speech detected. Waiting before restart...");
+//     setTimeout(() => {
+//       if (!isSpeakingRef.current && isMounted) {
+//         try {
+//           recognition.start();
+//           console.log("Recognition restarted after no-speech");
+//         } catch (e) {
+//           if (e.name !== "InvalidStateError") console.error(e);
+//         }
+//       }
+//     }, 2000); // Delay prevents the rapid error loop
+//     return;
+//   }
 
-  // Microphone not found
-  if (event.error === "audio-capture") {
-    alert("No microphone detected. Please connect a microphone.");
-    return;
-  }
+//   // Microphone not found
+//   if (event.error === "audio-capture") {
+//     alert("No microphone detected. Please connect a microphone.");
+//     return;
+//   }
 
-  // User blocked mic permission
-  if (event.error === "not-allowed") {
-    alert("Microphone access denied. Please allow mic in browser settings.");
-    return;
-  }
+//   // User blocked mic permission
+//   if (event.error === "not-allowed") {
+//     alert("Microphone access denied. Please allow mic in browser settings.");
+//     return;
+//   }
 
-  // Restart for other errors
-  if (event.error !== "aborted" && isMounted && !isSpeakingRef.current) {
-    setTimeout(() => {
-      if (isMounted) {
-        try {
-          recognition.start();
-          console.log("Recognition restarted after error");
-        } catch (e) {
-          if (e.name !== "InvalidStateError") console.error(e);
-        }
-      }
-    }, 1000);
-  }
-};
+//   // Restart for other errors
+//   if (event.error !== "aborted" && isMounted && !isSpeakingRef.current) {
+//     setTimeout(() => {
+//       if (isMounted) {
+//         try {
+//           recognition.start();
+//           console.log("Recognition restarted after error");
+//         } catch (e) {
+//           if (e.name !== "InvalidStateError") console.error(e);
+//         }
+//       }
+//     }, 1000);
+//   }
+// };
 
 
-    // recognition.onerror = (event) =>{
-    //   console.warn("Recognition error:", event.error);
-    //   isRecognizingRef.current = false;
-    //   setListening(false);
-    //   if(event.error !== "aborted" && isMounted && !isSpeakingRef.current){
-    //     setTimeout(()=>{
-    //       if(isMounted){
-    //         try{
-    //           recognition.start();
-    //           console.log("Recognition restarted after error");
-    //         } catch(e){
-    //           if(e.name !== "InvalidStateError")
-    //             console.error(e);
-    //         }
-    //       }
+    recognition.onerror = (event) =>{
+      console.warn("Recognition error:", event.error);
+      isRecognizingRef.current = false;
+      setListening(false);
+      if(event.error !== "aborted" && isMounted && !isSpeakingRef.current){
+        setTimeout(()=>{
+          if(isMounted){
+            try{
+              recognition.start();
+              console.log("Recognition restarted after error");
+            } catch(e){
+              if(e.name !== "InvalidStateError")
+                console.error(e);
+            }
+          }
             
-    //       // safeRecognition();
-    //     }, 1000);
-    //   }
-    // };
+          // safeRecognition();
+        }, 1000);
+      }
+    };
 
 
     recognition.onresult=async (e)=>{
