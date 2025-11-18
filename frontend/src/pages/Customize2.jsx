@@ -38,7 +38,7 @@ function Customize2() {
        <IoMdArrowRoundBack className='absolute top-[30px] left-[30px] text-white cursor-pointer w-[25px] h-[25px]' onClick={()=>navigate("/customize")}/>
        <h1 className='text-white mb-[40px] text-[30px] text-center'>Enter Your <span className='text-blue-200'>Assistant Name</span></h1>
 
-        <input type="text" placeholder='eg. Gandhi' className='w-full max-w-[600px] h-[60px] outline-none border-2 border-white
+        <input type="text" placeholder='eg. Jarvis, Siri ,...' className='w-full max-w-[600px] h-[60px] outline-none border-2 border-white
         bg-transparent text-white placeholder-gray-300 px-[20px] py-[10px] rounded-full text-[18px]'
          required onChange={(e)=>setAssistantName(e.target.value)} value={assistantName} />
 
